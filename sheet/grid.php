@@ -1528,14 +1528,14 @@ class SheetLib extends BitSystem
 {
 	function get_sheet_info( $sheet_id ) // {{{2
 	{
-		$result = $this->query( "SELECT * FROM `tiki_sheets` WHERE `sheet_id` = ?", array( $sheet_id ) );
+		$result = $this->mDb->query( "SELECT * FROM `tiki_sheets` WHERE `sheet_id` = ?", array( $sheet_id ) );
 
 		return $result->fetchRow();
 	}
 
 	function get_sheet_layout( $sheet_id ) // {{{2
 	{
-		$result = $this->query( "SELECT `class_name`, `header_row`, `footer_row` FROM `tiki_sheet_layout` WHERE `sheet_id` = ? AND `end` IS NULL", array( $sheet_id ) );
+		$result = $this->mDb->query( "SELECT `class_name`, `header_row`, `footer_row` FROM `tiki_sheet_layout` WHERE `sheet_id` = ? AND `end` IS NULL", array( $sheet_id ) );
 
 		return $result->fetchRow();
 	}
@@ -1567,7 +1567,7 @@ class SheetLib extends BitSystem
 				break;
 		}
 
-		$result = $this->query( "SELECT * FROM `tiki_sheets`  ORDER BY $sort", array(), $maxRecord, $offset );
+		$result = $this->mDb->query( "SELECT * FROM `tiki_sheets`  ORDER BY $sort", array(), $maxRecord, $offset );
 
 		while( $row = $result->fetchRow() )
 			$results['data'][] = $row;
@@ -1579,22 +1579,22 @@ class SheetLib extends BitSystem
 
 	function remove_sheet( $sheet_id ) // {{{2
 	{
-		$this->query( "DELETE FROM `tiki_sheets` WHERE `sheet_id` = ?", array( $sheet_id ) );
-		$this->query( "DELETE FROM `tiki_sheet_values` WHERE `sheet_id` = ?", array( $sheet_id ) );
-		$this->query( "DELETE FROM `tiki_sheet_layout` WHERE `sheet_id` = ?", array( $sheet_id ) );
+		$this->mDb->query( "DELETE FROM `tiki_sheets` WHERE `sheet_id` = ?", array( $sheet_id ) );
+		$this->mDb->query( "DELETE FROM `tiki_sheet_values` WHERE `sheet_id` = ?", array( $sheet_id ) );
+		$this->mDb->query( "DELETE FROM `tiki_sheet_layout` WHERE `sheet_id` = ?", array( $sheet_id ) );
 	}
 
 	function replace_sheet( $sheet_id, $title, $description, $author ) // {{{2
 	{
 		if( $sheet_id == 0 )
 		{
-			$this->query( "INSERT INTO `tiki_sheets` ( `title`, `description`, `author` ) VALUES( ?, ?, ? )", array( $title, $description, $author ) );
+			$this->mDb->query( "INSERT INTO `tiki_sheets` ( `title`, `description`, `author` ) VALUES( ?, ?, ? )", array( $title, $description, $author ) );
 
 			return $this->getOne( "SELECT MAX(`sheet_id`) FROM `tiki_sheets` WHERE `author` = ?", array( $author ) );
 		}
 		else
 		{
-			$this->query( "UPDATE `tiki_sheets` SET `title` = ?, `description` = ?, `author` = ? WHERE `sheet_id` = ?", array( $title, $description, $author, $sheet_id ) );
+			$this->mDb->query( "UPDATE `tiki_sheets` SET `title` = ?, `description` = ?, `author` = ? WHERE `sheet_id` = ?", array( $title, $description, $author, $sheet_id ) );
 
 			return $sheet_id;
 		}
@@ -1616,8 +1616,8 @@ class SheetLib extends BitSystem
 
 		$stamp = time();
 
-		$this->query( "UPDATE `tiki_sheet_layout` SET `end` = ? WHERE sheet_id = ? AND `end` IS NULL", array( $stamp, $sheet_id ) );
-		$this->query( "INSERT INTO `tiki_sheet_layout` ( `sheet_id`, `begin`, `class_name`, `header_row`, `footer_row` ) VALUES( ?, ?, ?, ?, ? )", array( $sheet_id, $stamp, $class_name, (int)$header_row, (int)$footer_row ) );
+		$this->mDb->query( "UPDATE `tiki_sheet_layout` SET `end` = ? WHERE sheet_id = ? AND `end` IS NULL", array( $stamp, $sheet_id ) );
+		$this->mDb->query( "INSERT INTO `tiki_sheet_layout` ( `sheet_id`, `begin`, `class_name`, `header_row`, `footer_row` ) VALUES( ?, ?, ?, ?, ? )", array( $sheet_id, $stamp, $class_name, (int)$header_row, (int)$footer_row ) );
 
 		return true;
 	}
