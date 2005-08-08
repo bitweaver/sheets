@@ -118,7 +118,14 @@ class Spreadsheet_Excel_Reader {
         0x2a => '$%1.0f', //"$#,##0;($#,##0)",
         0x2b => '%1.2f', //"#,##0.00;(#,##0.00)",
         0x2c => '$%1.2f', //"$#,##0.00;($#,##0.00)",
-        0x30 => '%1.0f'); //"##0.0E0";
+        0x30 => '%1.0f', //"##0.0E0";
+        0xa4 => Spreadsheet_Excel_Reader_DEF_NUM_FORMAT, // "0%"
+        0xa5 => '$%1.2f', //"$#,##0.00;($#,##0.00)",
+        0xa6 => '%1.2f%%', // "0.00%"
+        0xa7 => '%1.0f%%', // "0%"
+        0xa8 => '%1.1f%%', // "0.0%"
+        0xa9 => '%1.0f', // "#,##0"
+    );
 
     function Spreadsheet_Excel_Reader(){
         $this->_ole =& new R_OLE();
@@ -350,7 +357,6 @@ class Spreadsheet_Excel_Reader {
                 case Spreadsheet_Excel_Reader_Type_XF:
                         //global $dateFormats, $numberFormats;
                         $indexCode = ord($this->data[$pos+6]) | ord($this->data[$pos+7]) << 8;
-                        //echo "\nType.XF $indexCode ";
                         if (array_key_exists($indexCode, $this->dateFormats)) {
                         //echo "isdate ".$dateFormats[$indexCode];
                             $this->formatRecords['xfrecords'][] = array(
@@ -367,7 +373,7 @@ class Spreadsheet_Excel_Reader {
                             $isdate = FALSE;
                             if ($indexCode > 0){
                                 $formatstr = $this->formatRecords[$indexCode];
-                                //echo "\ndate-time $formatstr \n";
+                        	echo "Type.XF $indexCode -> $formatstr <br>\n";
                                 if (preg_match("/[^hmsday\/\-:\s]/i", $formatstr) == 0) { // found day and time format
                                     $isdate = TRUE;
                                     $formatstr = str_replace('mm', 'i', $formatstr);
@@ -550,20 +556,23 @@ class Spreadsheet_Excel_Reader {
                      //$num = ;
 
                     break;
+		case Spreadsheet_Excel_Reader_Type_STRING:
+		case Spreadsheet_Excel_Reader_Type_FORMULA:
+		case Spreadsheet_Excel_Reader_Type_FORMULA2:
                 case Spreadsheet_Excel_Reader_Type_NUMBER:
                     $row    = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
                     $column = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
                     $tmp = unpack("d", substr($this->data, $spos + 6, 8)); // It machine machine dependent
                     if ($this->isDate($spos)) {
-                        list($string, $raw) = $this->createDate($tmp['']);
+                        list($string, $raw) = $this->createDate($tmp[1]);
                      //   $this->addcell(DateRecord($r, 1));
                     }else{
-                        $raw = $tmp[''];
+                        $raw = $tmp[1];
                         if (isset($this->_columnsFormat[$column + 1])){
                                 $this->curformat = $this->_columnsFormat[$column + 1];
                         }
                         
-                        $string = sprintf($this->curformat, $tmp[''] * $this->multiplier);
+                        $string = sprintf($this->curformat, $tmp[1] * $this->multiplier);
 
                      //   $this->addcell(NumberRecord($r));
                     }
@@ -571,7 +580,7 @@ class Spreadsheet_Excel_Reader {
                     //echo "Number $row $column $string\n";
                     break;
                 case Spreadsheet_Excel_Reader_Type_BOOLERR:
-                    case Type_BOOLERR:
+                    //case Type_BOOLERR:
                     $row    = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
                     $column = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
                     $string = ord($this->data[$spos+6]);
@@ -589,12 +598,11 @@ class Spreadsheet_Excel_Reader {
 
                    // $this->addcell(LabelRecord($r));
                     break;
-
                 case Spreadsheet_Excel_Reader_Type_EOF:
                     $cont = false;
                     break;
                 default:
-                    //echo ' unknown :'.base_convert($r['code'],10,16)."\n";
+                    //echo ' unknown :'.base_convert($code,10,16)."\n";
                     break;
 
             }
@@ -659,7 +667,7 @@ class Spreadsheet_Excel_Reader {
                 $value = $rknum >> 2;
         } else {
                 $tmp = unpack("d", pack("VV", 0, ($rknum & 0xfffffffc)));
-                $value = $tmp[''];
+                $value = $tmp[1];
         }
 
         if (($rknum & 0x01) != 0) {
