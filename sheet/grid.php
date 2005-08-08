@@ -76,7 +76,7 @@ function BITSHEET_REGISTER_HANDLER( $class )
  */
 class BitSheetDataFormat
 {
-	function currency( $value, $before = '', $after = '' )
+	function currency( $value, $before = '$', $after = '' )
 	{
 		return $before . sprintf( "%.2f", (float)$value ) . $after;
 	}
@@ -90,6 +90,13 @@ class BitSheetDataFormat
 	{
 		return BitSheetDataFormat::currency( $value, '$' );
 	}
+
+	function percentage( $value, $before = '', $after = '%' )
+	{
+		return $before . sprintf( "%.2f", (float)$value * 100) . $after;
+	}
+
+
 } // }}}1
 
  /** BitSheet Class {{{1
@@ -1030,7 +1037,7 @@ class BitSheetDatabaseHandler extends BitSheetDataHandler
 	{
 		global $gBitSystem;
 		
-		$result = $gBitSystem->query( "SELECT `row_index`, `column_index`, `value`, `calculation`, `width`, `height`, `format` FROM `tiki_sheet_values` WHERE `sheet_id` = ? AND ? >= `begin` AND ( `end` IS NULL OR `end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
+		$result = $gBitSystem->mDb->query( "SELECT `row_index`, `column_index`, `value`, `calculation`, `width`, `height`, `format` FROM `tiki_sheet_values` WHERE `sheet_id` = ? AND ? >= `begin` AND ( `end` IS NULL OR `end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
 
 		while( $row = $result->fetchRow() )
 		{
@@ -1043,7 +1050,7 @@ class BitSheetDatabaseHandler extends BitSheetDataHandler
 		}
 
 		// Fetching the layout informations.
-		$result2 = $gBitSystem->query( "SELECT `class_name`, `header_row`, `footer_row` FROM `tiki_sheet_layout` WHERE `sheet_id` = ? AND ? >= `begin` AND ( `end` IS NULL OR `end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
+		$result2 = $gBitSystem->mDb->query( "SELECT `class_name`, `header_row`, `footer_row` FROM `tiki_sheet_layout` WHERE `sheet_id` = ? AND ? >= `begin` AND ( `end` IS NULL OR `end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
 
 		if( $row = $result2->fetchRow() )
 		{
@@ -1108,12 +1115,12 @@ class BitSheetDatabaseHandler extends BitSheetDataHandler
 
 		$conditions = str_repeat( "( row_index = ? AND column_index = ? ) OR ", ( sizeof($updates) - 4 ) / 2 );
 			
-		$gBitSystem->query( "UPDATE `tiki_sheet_values` SET `end` = ? WHERE `sheet_id` = ? AND `end` IS NULL AND ( {$conditions}`row_index` >= ? OR `column_index` >= ? )", $updates );
+		$gBitSystem->mDb->query( "UPDATE `tiki_sheet_values` SET `end` = ? WHERE `sheet_id` = ? AND `end` IS NULL AND ( {$conditions}`row_index` >= ? OR `column_index` >= ? )", $updates );
 
 		if( sizeof( $inserts ) > 0 )
 			foreach( $inserts as $values )
 			{
-				$gBitSystem->query( "INSERT INTO `tiki_sheet_values` (`sheet_id`, `begin`, `row_index`, `column_index`, `value`, `calculation`, `width`, `height`, `format` ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ? )", $values );
+				$gBitSystem->mDb->query( "INSERT INTO `tiki_sheet_values` (`sheet_id`, `begin`, `row_index`, `column_index`, `value`, `calculation`, `width`, `height`, `format` ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ? )", $values );
 			}
 
 		// }}}3
@@ -1179,7 +1186,9 @@ class BitSheetExcelHandler extends BitSheetDataHandler
 					{
 						$sheet->initCell( $row - 1, $col - 1 );
 						
-						$info = $data['cellsInfo'][$row][$col];
+						//$info = $data['cellsInfo'][$row][$col];
+						$info = (isset($data['cellsInfo'][$row][$col])) ? $data['cellsInfo'][$row][$col] : '';
+
 
 						if( !isset( $info['rowspan'] ) )
 							$height = 1;
@@ -1341,7 +1350,7 @@ class BitSheetWikiTableHandler extends BitSheetDataHandler
 	{
 		global $gBitSystem;
 		
-		$result = $gBitSystem->query( "SELECT `data` FROM `tiki_pages` WHERE `pageName` = ?", array( $this->pageName ) );
+		$result = $gBitSystem->mDb->query( "SELECT `data` FROM `tiki_pages` WHERE `pageName` = ?", array( $this->pageName ) );
 		if( $row = $result->fetchRow() )
 		{
 			$tables = $this->getRawTables( $row['data'] );
@@ -1572,7 +1581,7 @@ class SheetLib extends BitSystem
 		while( $row = $result->fetchRow() )
 			$results['data'][] = $row;
 
-		$results['cant'] = $this->getOne( "SELECT COUNT(*) FROM `tiki_sheets`", array() );
+		$results['cant'] = $this->mDb->getOne( "SELECT COUNT(*) FROM `tiki_sheets`", array() );
 
 		return $results;
 	}
@@ -1590,7 +1599,7 @@ class SheetLib extends BitSystem
 		{
 			$this->mDb->query( "INSERT INTO `tiki_sheets` ( `title`, `description`, `author` ) VALUES( ?, ?, ? )", array( $title, $description, $author ) );
 
-			return $this->getOne( "SELECT MAX(`sheet_id`) FROM `tiki_sheets` WHERE `author` = ?", array( $author ) );
+			return $this->mDb->getOne( "SELECT MAX(`sheet_id`) FROM `tiki_sheets` WHERE `author` = ?", array( $author ) );
 		}
 		else
 		{

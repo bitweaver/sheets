@@ -58,7 +58,7 @@ display = new Object;
 
 display.currency = function( value, before, after )
 {
-	if( before == null ) before = '';
+	if( before == null ) before = '$';
 	if( after == null ) after = '';
 
 	var strval = String( Math.round( value * 100 ) / 100 );
@@ -80,3 +80,21 @@ display.currency_ca = function( value )
 {
 	return display.currency( value, '', '$' );
 }
+
+display.percentage = function( value, before, after )
+{
+	if( before == null ) before = '';
+	if( after == null ) after = '%';
+
+	var strval = String( Math.round( value * 10000 ) / 100 );
+
+	if( strval.lastIndexOf( "." ) == -1 )
+		strval += ".00";
+	
+	while( strval.length - strval.lastIndexOf( "." ) < 3 )
+		strval += "0";
+
+	return before + strval + after;
+}
+
+
