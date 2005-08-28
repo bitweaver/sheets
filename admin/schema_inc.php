@@ -10,7 +10,7 @@ $tables = array(
   class_name C(64)
 ",
 
-'bit_sheet_values' => "
+'tiki_sheet_values' => "
   sheet_id I4 NOTNULL PRIMARY,
   begin I8 NOTNULL PRIMARY,
   `end` I8,
@@ -53,12 +53,12 @@ $indices = array (
 //	'tiki_sheets_user_id_idx' => array( 'table' => 'tiki_sheets', 'cols' => 'user_id', 'opts' => NULL )
 );
 // TODO - SPIDERR - following seems to cause time _decrease_ cause bigint on postgres. need more investigation
-//	'bit_sheet_posts_created_idx' => array( 'table' => 'bit_sheet_posts', 'cols' => 'created', 'opts' => NULL ),
+//	'tiki_sheet_posts_created_idx' => array( 'table' => 'tiki_sheet_posts', 'cols' => 'created', 'opts' => NULL ),
 $gBitInstaller->registerSchemaIndexes( SHEETS_PKG_NAME, $indices );
 
 // ### Sequences
 $sequences = array (
-	'bit_sheet_values_sheet_id_seq' => array( 'start' => 1 ) 
+	'tiki_sheet_values_sheet_id_seq' => array( 'start' => 1 ) 
 );
 $gBitInstaller->registerSchemaSequences( SHEETS_PKG_NAME, $sequences );
 
