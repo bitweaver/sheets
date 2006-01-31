@@ -35,7 +35,7 @@ APIC::import("org.apicnet.io.File");
  * @package 
  * @author diogene
  * @copyright Copyright (c) 2004
- * @version $Id: absOOo.php,v 1.1 2005/08/07 11:35:12 wolff_borg Exp $
+ * @version $Id: absOOo.php,v 1.2 2006/01/31 20:20:08 bitweaver Exp $
  * @access public
  **/
 class absOOo extends ErrorManager {
@@ -62,7 +62,7 @@ class absOOo extends ErrorManager {
 			"marginB"		=> "2",
 			"marginL"		=> "2",
 			"marginR"		=> "2",
-			"writingMode"	=> "lr-tb"),
+			"writingMode"	=> "lr-b"),
 		"Header"	=> array(
 			"Text"			=> FALSE,
 			"marginB"		=> FALSE,				// Ecart entre l'entête et le corps du document

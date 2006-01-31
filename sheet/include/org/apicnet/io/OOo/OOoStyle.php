@@ -31,7 +31,7 @@ APIC::import("org.apicnet.io.OOo.absOOo");
  * @package 
  * @author apicnet
  * @copyright Copyright (c) 2004
- * @version $Id: OOoStyle.php,v 1.1 2005/08/07 11:35:11 wolff_borg Exp $
+ * @version $Id: OOoStyle.php,v 1.2 2006/01/31 20:20:08 bitweaver Exp $
  * @access public
  **/
 class OOoStyle extends absOOo {
@@ -163,7 +163,7 @@ class OOoStyle extends absOOo {
 			"marginB"		=> "2",
 			"marginL"		=> "2",
 			"marginR"		=> "2",	
-			"writingMode"	=> "lr-tb"
+			"writingMode"	=> "lr-b"
 		);
 		$this->addStylePage($argPage);
 		$this->addGraphicStyle();
@@ -209,7 +209,7 @@ class OOoStyle extends absOOo {
 			"marginB"		=> "2",
 			"marginL"		=> "2",					// Mager de gauche de l'entête
 			"marginR"		=> "2",					// Mager de Droite de l'entête
-			"writingMode"	=> "lr-tb"				// Hauteur de l'entête
+			"writingMode"	=> "lr-b"				// Hauteur de l'entête
 		);
 	 * @return none
 	 **/
@@ -357,7 +357,7 @@ class OOoStyle extends absOOo {
 		$propertiesNode->setAttribute("style:country-complex", "none");
 		$propertiesNode->setAttribute("style:text-autospace", "ideograph-alpha");
 		$propertiesNode->setAttribute("style:line-break", "strict");
-		$propertiesNode->setAttribute("style:writing-mode", "lr-tb");
+		$propertiesNode->setAttribute("style:writing-mode", "lr-b");
 		$propertiesNode->setAttribute("country-asian", "none");
 		
 		$tabStopsNode =& $this->xml->createElement("style:tab-stops");

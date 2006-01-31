@@ -1350,7 +1350,7 @@ class BitSheetWikiTableHandler extends BitSheetDataHandler
 	{
 		global $gBitSystem;
 		
-		$result = $gBitSystem->mDb->query( "SELECT `data` FROM `tiki_pages` WHERE `pageName` = ?", array( $this->pageName ) );
+		$result = $gBitSystem->mDb->query( "SELECT `data` FROM `wiki_pages` WHERE `pageName` = ?", array( $this->pageName ) );
 		if( $row = $result->fetchRow() )
 		{
 			$tables = $this->getRawTables( $row['data'] );

@@ -33,7 +33,7 @@ APIC::import("org.apicnet.io.File");
  * @package 
  * @author diogene
  * @copyright Copyright (c) 2004
- * @version $Id: OOoMeta.php,v 1.1 2005/08/07 11:35:11 wolff_borg Exp $
+ * @version $Id: OOoMeta.php,v 1.2 2006/01/31 20:20:08 bitweaver Exp $
  * @access public
  **/
 class OOoMeta extends absOOo {
@@ -62,7 +62,7 @@ class OOoMeta extends absOOo {
 	
 	
 	/**
-	 * OOoMeta::create() est la méthode de création d'un fichier de méta vierge.
+	 * OOoMeta::create() est la méthode de création d'un fichier de méa vierge.
 	 * 
 	 * @return none
 	 **/
@@ -87,9 +87,9 @@ class OOoMeta extends absOOo {
 	}
 	
 	/**
-	 * OOoMeta::getBody() permet de générer la chaine de caractère correspondant au fichier de méta
+	 * OOoMeta::getBody() permet de générer la chaine de caractère correspondant au fichier de méa
 	 * 
-	 * @return String le fichier méta sous forme de chaîne de carctère
+	 * @return String le fichier méa sous forme de chaîne de carctère
 	 **/
 	function getBody(){
 		return $this->toString();
