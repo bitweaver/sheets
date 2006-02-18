@@ -2,7 +2,11 @@
 // Initialise global variables
 global $gBitSystem, $gBitUser;
 // Register package with kernel
-$gBitSystem->registerPackage( 'sheets', dirname( __FILE__ ).'/' );
+$registerHash = array(
+	'package_name' => 'sheets',
+	'package_path' => dirname( __FILE__ ).'/',
+);
+$gBitSystem->registerPackage( $registerHash );
 // If package is installed
 if( $gBitSystem->isPackageActive( 'sheets' ) )
 {
