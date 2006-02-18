@@ -4,7 +4,7 @@ $tables = array(
 'tiki_sheet_layout' => "
   sheet_id I4 NOTNULL PRIMARY,
   begin I8 NOTNULL PRIMARY,
-  `end` I8,
+  cell_end I8,
   header_row I4 NOTNULL,
   footer_row I4 NOTNULL,
   class_name C(64)
@@ -13,10 +13,10 @@ $tables = array(
 'tiki_sheet_values' => "
   sheet_id I4 NOTNULL PRIMARY,
   begin I8 NOTNULL PRIMARY,
-  `end` I8,
+  cell_end I8,
   row_index I4 NOTNULL PRIMARY,
   column_index I4 NOTNULL PRIMARY,
-  value C(255),
+  cell_value C(255),
   calculation C(255),
   width I4 NOTNULL DEFAULT '1',
   height I4 NOTNULL DEFAULT '1',
