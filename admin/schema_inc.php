@@ -3,7 +3,7 @@
 $tables = array(
 'tiki_sheet_layout' => "
   sheet_id I4 NOTNULL PRIMARY,
-  begin I8 NOTNULL PRIMARY,
+  cell_begin I8 NOTNULL PRIMARY,
   cell_end I8,
   header_row I4 NOTNULL,
   footer_row I4 NOTNULL,
@@ -12,7 +12,7 @@ $tables = array(
 
 'tiki_sheet_values' => "
   sheet_id I4 NOTNULL PRIMARY,
-  begin I8 NOTNULL PRIMARY,
+  cell_begin I8 NOTNULL PRIMARY,
   cell_end I8,
   row_index I4 NOTNULL PRIMARY,
   column_index I4 NOTNULL PRIMARY,

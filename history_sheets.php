@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_sheets/history_sheets.php,v 1.1 2005/08/07 11:35:07 wolff_borg Exp $
+// $Header: /cvsroot/bitweaver/_bit_sheets/history_sheets.php,v 1.2 2006/02/19 19:36:13 lsces Exp $
 
 // Based on galleries.php
 // Copyright (c) 2002-2005, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
@@ -33,10 +33,10 @@ $smarty->assign('description', $info['description']);
 
 $smarty->assign('page_mode', 'view' );
 
-$result = $gBitSystem->query( "SELECT DISTINCT `begin` FROM `tiki_sheet_values` WHERE `sheet_id` = ? ORDER BY begin DESC", array( $_REQUEST['sheet_id'] ) );
+$result = $gBitSystem->query( "SELECT DISTINCT `cell_begin` FROM `tiki_sheet_values` WHERE `sheet_id` = ? ORDER BY `cell_begin` DESC", array( $_REQUEST['sheet_id'] ) );
 $data = array();
 while( $row = $result->fetchRow() )
-	$data[] = array( "stamp" =>$row['begin'], "string" => date( "Y-m-d H:i:s", $row['begin'] ) );
+	$data[] = array( "stamp" =>$row['cell_begin'], "string" => date( "Y-m-d H:i:s", $row['cell_begin'] ) );
 
 $smarty->assign_by_ref( 'history', $data );
 
