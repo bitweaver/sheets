@@ -1037,7 +1037,7 @@ class BitSheetDatabaseHandler extends BitSheetDataHandler
 	{
 		global $gBitSystem;
 		
-		$result = $gBitSystem->mDb->query( "SELECT `row_index`, `column_index`, `cell_value`, `calculation`, `width`, `height`, `format` FROM `tiki_sheet_values` WHERE `sheet_id` = ? AND ? >= `begin` AND ( `cell_end` IS NULL OR `cell_end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
+		$result = $gBitSystem->mDb->query( "SELECT `row_index`, `column_index`, `cell_value`, `calculation`, `width`, `height`, `format` FROM `tiki_sheet_values` WHERE `sheet_id` = ? AND ? >= `cell_begin` AND ( `cell_end` IS NULL OR `cell_end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
 
 		while( $row = $result->fetchRow() )
 		{
@@ -1050,7 +1050,7 @@ class BitSheetDatabaseHandler extends BitSheetDataHandler
 		}
 
 		// Fetching the layout informations.
-		$result2 = $gBitSystem->mDb->query( "SELECT `class_name`, `header_row`, `footer_row` FROM `tiki_sheet_layout` WHERE `sheet_id` = ? AND ? >= `begin` AND ( `cell_end` IS NULL OR `cell_end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
+		$result2 = $gBitSystem->mDb->query( "SELECT `class_name`, `header_row`, `footer_row` FROM `tiki_sheet_layout` WHERE `sheet_id` = ? AND ? >= `cell_begin` AND ( `cell_end` IS NULL OR `cell_end` > ? )", array( $this->sheet_id, (int)$this->readDate, (int)$this->readDate ) );
 
 		if( $row = $result2->fetchRow() )
 		{
@@ -1120,7 +1120,7 @@ class BitSheetDatabaseHandler extends BitSheetDataHandler
 		if( sizeof( $inserts ) > 0 )
 			foreach( $inserts as $values )
 			{
-				$gBitSystem->mDb->query( "INSERT INTO `tiki_sheet_values` (`sheet_id`, `begin`, `row_index`, `column_index`, `value`, `calculation`, `width`, `height`, `format` ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ? )", $values );
+				$gBitSystem->mDb->query( "INSERT INTO `tiki_sheet_values` (`sheet_id`, `cell_begin`, `row_index`, `column_index`, `value`, `calculation`, `width`, `height`, `format` ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ? )", $values );
 			}
 
 		// }}}3
@@ -1626,7 +1626,7 @@ class SheetLib extends BitSystem
 		$stamp = time();
 
 		$this->mDb->query( "UPDATE `tiki_sheet_layout` SET `cell_end` = ? WHERE sheet_id = ? AND `cell_end` IS NULL", array( $stamp, $sheet_id ) );
-		$this->mDb->query( "INSERT INTO `tiki_sheet_layout` ( `sheet_id`, `begin`, `class_name`, `header_row`, `footer_row` ) VALUES( ?, ?, ?, ?, ? )", array( $sheet_id, $stamp, $class_name, (int)$header_row, (int)$footer_row ) );
+		$this->mDb->query( "INSERT INTO `tiki_sheet_layout` ( `sheet_id`, `cell_begin`, `class_name`, `header_row`, `footer_row` ) VALUES( ?, ?, ?, ?, ? )", array( $sheet_id, $stamp, $class_name, (int)$header_row, (int)$footer_row ) );
 
 		return true;
 	}
