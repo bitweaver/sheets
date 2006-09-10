@@ -5,6 +5,7 @@ global $gBitSystem, $gBitUser;
 $registerHash = array(
 	'package_name' => 'sheets',
 	'package_path' => dirname( __FILE__ ).'/',
+	'homeable' => TRUE,
 );
 $gBitSystem->registerPackage( $registerHash );
 // If package is installed

@@ -34,8 +34,6 @@ $tables = array(
 
 global $gBitInstaller;
 
-$gBitInstaller->makePackageHomeable(SHEETS_PKG_NAME);
-
 foreach( array_keys( $tables ) AS $tableName ) {
 	$gBitInstaller->registerSchemaTable( SHEETS_PKG_NAME, $tableName, $tables[$tableName] );
 }
