@@ -67,7 +67,7 @@
 {cycle values="odd,even" print=false}
 {section name=changes loop=$sheets}
 <tr>
-  <td class="{cycle advance=false}"><a class="galname" href="{$smarty.const.SHEETS_PKG_URL}view_sheets.php?sheet_id={$sheets[changes].sheet_id}">{$sheets[changes].title}</a></td>
+  <td class="{cycle advance=false}"><a class="galname" href="{$smarty.const.SHEETS_PKG_URL}view_sheets.php?sheet_id={$sheets[changes].sheet_id}">{$sheets[changes].title|escape}</a></td>
   <td class="{cycle advance=false}">{$sheets[changes].description}</td>
   <td class="{cycle advance=false}">{displayname user_id=$sheets[changes].author}</td>
   <td class="{cycle}">
