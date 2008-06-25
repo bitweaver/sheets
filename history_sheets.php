@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_sheets/history_sheets.php,v 1.2 2006/02/19 19:36:13 lsces Exp $
+// $Header: /cvsroot/bitweaver/_bit_sheets/history_sheets.php,v 1.3 2008/06/25 22:21:23 spiderr Exp $
 
 // Based on galleries.php
 // Copyright (c) 2002-2005, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
@@ -43,6 +43,6 @@ $smarty->assign_by_ref( 'history', $data );
 $section = 'sheet';
 
 // Display the template
-$gBitSystem->display("bitpackage:sheets/history-sheets.tpl");
+$gBitSystem->display("bitpackage:sheets/history-sheets.tpl", NULL, array( 'display_mode' => 'display' ));
 
 ?>

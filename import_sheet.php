@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_sheets/import_sheet.php,v 1.1 2005/08/07 11:35:07 wolff_borg Exp $
+// $Header: /cvsroot/bitweaver/_bit_sheets/import_sheet.php,v 1.2 2008/06/25 22:21:23 spiderr Exp $
 
 // Based on galleries.php
 // Copyright (c) 2002-2005, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
@@ -110,6 +110,6 @@ if( $gBitSystem->isPackageActive( 'categories' ) ) {
 $section = 'sheet';
 
 // Display the template
-$gBitSystem->display("bitpackage:sheets/import-sheets.tpl");
+$gBitSystem->display("bitpackage:sheets/import-sheets.tpl", NULL, array( 'display_mode' => 'display' ));
 
 ?>
