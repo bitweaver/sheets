@@ -11,7 +11,12 @@ $gBitSystem->registerPackage( $registerHash );
 // If package is installed
 if( $gBitSystem->isPackageActive( 'sheets' ) )
 {
+	$menuHash = array(
+		'package_name'       => SHEETS_PKG_NAME,
+		'index_url'          => SHEETS_PKG_URL.'index.php',
+		'menu_template'      => 'bitpackage:sheets/menu_sheets.tpl',
+	);
     // Register user menu
-    $gBitSystem->registerAppMenu( 'sheets', 'Spreadsheets', SHEETS_PKG_URL.'index.php', 'bitpackage:sheets/menu_sheets.tpl', 'Spreadsheets' );
+    $gBitSystem->registerAppMenu( $menuHash );
 }
 ?>
