@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_sheets/view_sheets.php,v 1.4 2009/10/01 14:17:04 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_sheets/view_sheets.php,v 1.5 2010/02/08 21:27:25 wjames5 Exp $
 
 // Based on galleries.php
 // Copyright (c) 2002-2005, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
@@ -8,7 +8,7 @@
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details.
 
 // Initialization
-require_once ('../bit_setup_inc.php');
+require_once ('../kernel/setup_inc.php');
 require_once (SHEETS_PKG_PATH.'sheet/grid.php');
 
 // Now check permissions to access this page
