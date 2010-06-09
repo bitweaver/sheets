@@ -31,7 +31,7 @@ APIC::import("org.apicnet.io.OOo.absOOo");
  * @package 
  * @author apicnet
  * @copyright Copyright (c) 2004
- * @version $Id: OOoStyle.php,v 1.2 2006/01/31 20:20:08 bitweaver Exp $
+ * @version $Id$
  * @access public
  **/
 class OOoStyle extends absOOo {

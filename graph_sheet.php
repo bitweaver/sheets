@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_sheets/graph_sheet.php,v 1.5 2010/02/08 21:27:25 wjames5 Exp $
+// $Header$
 
 // Based on galleries.php
 // Copyright (c) 2002-2005, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.

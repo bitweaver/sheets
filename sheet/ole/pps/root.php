@@ -17,7 +17,7 @@
 // | Based on OLE::Storage_Lite by Kawai, Takanori                        |
 // +----------------------------------------------------------------------+
 //
-// $Id: root.php,v 1.1 2005/08/07 11:35:08 wolff_borg Exp $
+// $Id$
 
 
 /**

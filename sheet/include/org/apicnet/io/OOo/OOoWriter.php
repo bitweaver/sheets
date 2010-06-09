@@ -32,7 +32,7 @@ APIC::import("org.apicnet.io.OOo.objOOo.OOoText");
  * @package 
  * @author apicnet
  * @copyright Copyright (c) 2004
- * @version $Id: OOoWriter.php,v 1.1 2005/08/07 11:35:12 wolff_borg Exp $
+ * @version $Id$
  * @access public
  **/
 class OOoWriter extends absOOo {

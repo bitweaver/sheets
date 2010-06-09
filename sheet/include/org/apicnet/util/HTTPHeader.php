@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  * @package 
  * @author diogene
  * @copyright Copyright (c) 2004
- * @version $Id: HTTPHeader.php,v 1.1 2005/08/07 11:35:12 wolff_borg Exp $
+ * @version $Id$
  * @access public
  **/
 class HTTPHeader {

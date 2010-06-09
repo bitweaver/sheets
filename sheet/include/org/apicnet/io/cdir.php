@@ -8,8 +8,8 @@ if (strpos($_SERVER["SCRIPT_NAME"],basename(__FILE__)) !== false) {
 
 //
 // $Archive: /iPage/V1.1/include/dir.php $
-// $Date: 2005/08/07 11:35:11 $
-// $Revision: 1.1 $
+// $Date$
+// $Revision$
 //
 // $History: dir.php $
 // 
@@ -40,7 +40,7 @@ if ( !defined( "INCLUCDED_DIR" ) ) {
 * Filenames are stored in the same case as the are stored in the filesystem
 * sFilter is only applied to files.
  * @package or.apicnet.io
- * @version $Id: cdir.php,v 1.1 2005/08/07 11:35:11 wolff_borg Exp $
+ * @version $Id$
  * @access public
  **/
 Class CDir extends ErrorManager {

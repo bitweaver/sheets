@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_sheets/sheet/excel/writer/index.php,v 1.3 2009/10/01 14:17:04 wjames5 Exp $
+// $Header$
 
 // Copyright (c) 2002-2005, Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
 // All Rights Reserved. See below for details and a complete list of authors.

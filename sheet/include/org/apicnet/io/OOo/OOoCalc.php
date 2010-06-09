@@ -33,7 +33,7 @@ APIC::import("org.apicnet.io.OOo.absOOo");
  * @package 
  * @author apicnet
  * @copyright Copyright (c) 2004
- * @version $Id: OOoCalc.php,v 1.1 2005/08/07 11:35:12 wolff_borg Exp $
+ * @version $Id$
  * @access public
  **/
 class OOoCalc extends absOOo {

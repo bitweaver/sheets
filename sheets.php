@@ -1,6 +1,6 @@
 <?php
 
-// $Header: /cvsroot/bitweaver/_bit_sheets/sheets.php,v 1.5 2010/02/08 21:27:25 wjames5 Exp $
+// $Header$
 
 // Copyright (c) 2002-2005, TikiWiki Luis Argerich, Garland Foster, Eduardo Polidor, et. al.
 // Copyright (c) 2005, BitWeaver Stephan Borg
