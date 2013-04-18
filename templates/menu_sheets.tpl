@@ -1,5 +1,5 @@
 {strip}
-<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>
+{if $packageMenuTitle}<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>{/if}
 <ul class="{$packageMenuClass}">
 	{if $gBitUser->hasPermission( 'bit_p_read_sheet' )}
 		<li><a class="item" href="{$smarty.const.SHEETS_PKG_URL}index.php">{tr}List Sheets{/tr}</a></li>
