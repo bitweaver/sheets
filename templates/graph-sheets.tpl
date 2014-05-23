@@ -32,15 +32,15 @@
 		<option value="landscape">{tr}Landscape{/tr}</option>
 		<option value="portrait">{tr}Portrait{/tr}</option>
 	</select>
-	<input type="submit" class="btn" name="renderer" value="PDF"/>
+	<input type="submit" class="btn btn-default" name="renderer" value="PDF"/>
 </div>
 {/if}
 {if $hasgd}
 <div>
 	<input type="text" name="width" value="500" size="4"/>
 	<input type="text" name="height" value="400" size="4"/>
-	<input type="submit" class="btn" name="renderer" value="PNG"/>
-	<input type="submit" class="btn" name="renderer" value="JPEG"/>
+	<input type="submit" class="btn btn-default" name="renderer" value="PNG"/>
+	<input type="submit" class="btn btn-default" name="renderer" value="JPEG"/>
 </div>
 {/if}
 </form>
@@ -98,7 +98,7 @@
 	</tr>
 {/section}
 	<tr>
-		<td class="formcolor" colspan="2"><input type="submit" class="btn" value="{tr}show{/tr}" /></td>
+		<td class="formcolor" colspan="2"><input type="submit" class="btn btn-default" value="{tr}show{/tr}" /></td>
 	</tr>
 </table>
 </form>

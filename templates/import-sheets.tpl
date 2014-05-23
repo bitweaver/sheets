@@ -17,12 +17,12 @@
 {/section}
 		</select>
 		<input type="file" name="file" />
-		<input type="submit" class="btn" value="Import" />
+		<input type="submit" class="btn btn-default" value="Import" />
 	</form>
 	<form method="post" action="import_sheet.php?mode=import&sheet_id={$sheet_id}">
 		<h2>{tr}Grab Wiki Tables{/tr}</h2>
 		<input type="text" name="page"/>
 		<input type="hidden" name="handler" value="BitSheetWikiTableHandler"/>
-		<input type="submit" class="btn" value="Import"/>
+		<input type="submit" class="btn btn-default" value="Import"/>
 	</form>
 {/if}

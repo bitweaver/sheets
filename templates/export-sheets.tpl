@@ -14,6 +14,6 @@
 			<option value="{$handlers[key].class}">{$handlers[key].name} V. {$handlers[key].version}</option>
 {/section}
 		</select>
-		<input type="submit" class="btn" value="Export" />
+		<input type="submit" class="btn btn-default" value="Export" />
 	</form>
 {/if}

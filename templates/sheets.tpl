@@ -28,7 +28,7 @@
 					{/jstab}
 				{/if}
 
-<tr><td class="formcolor">&nbsp;</td><td class="formcolor"><input type="submit" class="btn" value="{tr}save{/tr}" name="edit" /></td></tr>
+<tr><td class="formcolor">&nbsp;</td><td class="formcolor"><input type="submit" class="btn btn-default" value="{tr}save{/tr}" name="edit" /></td></tr>
 </table>
 </form>
 </div>
@@ -51,7 +51,7 @@
    <td class="findtable">
    <form method="get" action="{$smarty.const.SHEETS_PKG_URL}sheets.php">
      <input type="text" name="find" value="{$find|escape}" />
-     <input type="submit" class="btn" value="{tr}find{/tr}" name="search" />
+     <input type="submit" class="btn btn-default" value="{tr}find{/tr}" name="search" />
      <input type="hidden" name="sort_mode" value="{$sort_mode|escape}" />
    </form>
    </td>
